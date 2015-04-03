@@ -17,5 +17,20 @@ export default Ember.Controller.extend({
         contentPath: 'total'
       })
     ];
-  })
+  }),
+
+  sortProperties: ['open'],
+  sortAscending: true,
+
+  actions: {
+    sortByColumn: function(sortColumn) {
+      console.log('sortByColumn', sortColumn);
+      if (sortColumn !== this.get('sortProperties')[0]) {
+        this.set('sortAscending', !this.get('sortAscending'));
+      } else {
+        this.set('sortProperties', [sortColumn]);
+        this.set('sortAscending', true);
+      }
+    }
+  }
 });
