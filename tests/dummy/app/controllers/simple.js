@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Column from 'ember-cli-ember-table/column-definition';
 
-export default Ember.Controller.extend({
+export default Ember.ArrayController.extend({
   columns: Ember.computed(function(){
     return [
       Column.create({
@@ -24,13 +24,14 @@ export default Ember.Controller.extend({
 
   actions: {
     sortByColumn: function(sortColumn) {
-      console.log('sortByColumn', sortColumn);
-      if (sortColumn !== this.get('sortProperties')[0]) {
+      var columnName = sortColumn.toLowerCase();
+      if (columnName === this.get('sortProperties')[0]) {
         this.set('sortAscending', !this.get('sortAscending'));
       } else {
-        this.set('sortProperties', [sortColumn]);
+        this.set('sortProperties', [columnName]);
         this.set('sortAscending', true);
       }
     }
+
   }
 });
